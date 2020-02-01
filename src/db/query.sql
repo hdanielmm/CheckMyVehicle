@@ -5,7 +5,7 @@ CREATE DATABASE IF NOT EXISTS sonar;
 
 CREATE TABLE vehicle (
   id INT(11) NOT NULL AUTO_INCREMENT, 
-  license_plate VARCHAR(10) NOT NULL, 
+  license_plate VARCHAR(10) NOT NULL UNIQUE, 
   brand VARCHAR(25) DEFAULT NULL, 
   line VARCHAR(25) DEFAULT NULL, 
   model VARCHAR(25) DEFAULT NULL,
@@ -32,22 +32,33 @@ describe technician;
 
 /* Review */
 
+DROP TABLE review;
+
 CREATE TABLE review (
   id INT(10) NOT NULL AUTO_INCREMENT,
   date_review TIMESTAMP,
   license_plate VARCHAR(10),
-  technician_id INT(10),
+  checked BOOLEAN DEFAULT 0,
   PRIMARY KEY (id),
-  FOREIGN KEY (license_plate) REFERENCES (vehicle),
-  FOREIGN KEY (technician_id) REFERENCES (technician)
+  FOREIGN KEY (license_plate) REFERENCES vehicle (license_plate)
 );
+
+describe review;
 
 /* Items */
 
-CREATE TABLE items (
+DROP TABLE item;
+
+CREATE TABLE item (
   id INT(10) NOT NULL AUTO_INCREMENT,
   name VARCHAR(25),
   review_id INT(10),
-  PRIMARY KEY(id),
-  FOREIGN KEY (review_id) REFERENCES (review);
+  technician_id INT(10),
+  comments VARCHAR(255),
+  checked BOOLEAN DEFAULT 0,
+  PRIMARY KEY (id),
+  FOREIGN KEY (review_id) REFERENCES review (id),
+  FOREIGN KEY (technician_id) REFERENCES technician (id)
 );
+
+describe item;
