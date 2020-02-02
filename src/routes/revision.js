@@ -12,11 +12,11 @@ router.get('/revision', (req, res) => {
 });
 
 router.post('/revision', (req, res) => {
-  const { estado, vehiculoPlaca, empleadoId, fecha } = req.body;
+  const { estado, vehiculoPlaca, empleadoId, fechaRevision } = req.body;
 
   const query = 'INSERT INTO revision SET ?';
 
-  mysqlConnection.query(query, { estado, vehiculoPlaca, empleadoId, fecha }, (err, rows, fields) => {
+  mysqlConnection.query(query, { estado, vehiculoPlaca, empleadoId, fechaRevision }, (err, rows, fields) => {
     !err ? res.json({ Status: 'Revisión guardada', revisionId: rows.insertId }) : console.log(err);
   });
 });
