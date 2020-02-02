@@ -17,7 +17,18 @@ router.post('/revision', (req, res) => {
   const query = 'INSERT INTO revision SET ?';
 
   mysqlConnection.query(query, { estado, vehiculoPlaca, empleadoId, fecha }, (err, rows, fields) => {
-    !err ? res.json({ Status: 'Revisión guardada', revisionId: rows.insertId}) : console.log(err);
+    !err ? res.json({ Status: 'Revisión guardada', revisionId: rows.insertId }) : console.log(err);
+  });
+});
+
+router.post('/revision/:id/parte', (req, res) => {
+  const revisionId = req.params.id;
+  const { fechaRevision, diagnostico, parteVehiculoId, tecnicoId } = req.body;
+
+  const query = 'insert into revisionParteVehiculo set ?';
+
+  mysqlConnection.query(query, { fechaRevision, diagnostico, revisionId, parteVehiculoId, tecnicoId }, (err, rows, fields) => {
+    !err ? res.json({ Status: "Parte registrada", revisionParteId: rows.insertId }) : console.log(err);
   });
 });
 
