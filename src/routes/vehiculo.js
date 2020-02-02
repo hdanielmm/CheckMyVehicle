@@ -5,6 +5,7 @@ const mysqlConnection = require('../database');
 
 router.get('/vehiculo', (req, res) => {
   mysqlConnection.query('SELECT * FROM vehiculo', (err, rows, fields) => {
+    console.log(rows);
     if (!err) {
       res.json(rows);
     } else {

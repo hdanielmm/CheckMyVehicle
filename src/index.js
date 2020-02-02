@@ -14,7 +14,7 @@ app.use(express.json());
 // Routes
 app.use(require('./routes/index'));
 app.use(require('./routes/vehiculo'));
-app.use(require('./routes/review'));
+app.use(require('./routes/revision'));
 app.use(require('./routes/technician'));
 app.use(require('./routes/item'));
 

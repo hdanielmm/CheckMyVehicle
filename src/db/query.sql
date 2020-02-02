@@ -14,7 +14,7 @@ create table parteVehiculo(
 /* Empleado */
 
 create table empleado(
-  id int(10) not null,
+  id int(10) not null auto_increment,
   nombre varchar(20) not null,
   usuario varchar(20) not null,
   contrasenia varchar(20) not null,
@@ -36,6 +36,7 @@ CREATE TABLE vehiculo (
 CREATE TABLE revision (
   id INT(10) NOT NULL AUTO_INCREMENT,
   estado boolean,
+  fecha timestamp,
   vehiculoPlaca varchar(10) not null,
   empleadoId int(10) not null,
   primary key (id),
