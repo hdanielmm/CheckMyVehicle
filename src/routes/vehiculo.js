@@ -3,16 +3,9 @@ const router = express.Router();
 
 const mysqlConnection = require('../database');
 
-router.get('/vehiculo', (req, res) => {
-  mysqlConnection.query('SELECT * FROM vehiculo', (err, rows, fields) => {
-    console.log(rows);
-    if (!err) {
-      res.json(rows);
-    } else {
-      console.log(err);
-    }
-  });
-});
+const VehiculoController = require('../controllers/vehiculo');
+
+router.get('/vehiculo', VehiculoController.vehiculos_get_all);
 
 router.get('/vehiculo/:placa', (req, res) => {
   const placa = req.params.placa;
