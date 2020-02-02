@@ -78,13 +78,25 @@ create table revision (
 
 create table revisionParteVehiculo(
   id int(20) not null auto_increment,
-  fechaRevison timestamp not null,
+  fechaRevison timestamp,
   diagnostico varchar(255),
   revisionId int(20) not null, 
   parteVehiculoId int(20) not null,
-  tecnicoId int(20) not null,
+  tecnicoId int(20),
   primary key (id),
   foreign key (tecnicoId) references empleado (id),
   foreign key (revisionId) references revision (id),
   foreign key (parteVehiculoId) references parteVehiculo(id)
 );
+
+
+
+select r.vehiculoPlaca, e.nombre, rpv.diagnostico
+from revision r
+inner join revisionParteVehiculo rpv on r.id = rpv.revisionId
+inner join empleado e on e.id = rpv.tecnicoId; 
+
+select r.vehiculoPlaca, e.nombre, rpv.diagnostico
+from ((revision r
+inner join revisionParteVehiculo rpv on r.id = rpv.revisionId)
+inner join empleado e on e.id = rpv.tecnicoId); 

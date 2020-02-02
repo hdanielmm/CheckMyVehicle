@@ -32,8 +32,7 @@ router.post('/vehiculo', (req, res) => {
 
   mysqlConnection.query(query, { placa, marca, linea, modelo }, (err, rows, fields) => {
     if (!err) {
-      console.log('insertId', rows.insertId);
-      res.json({ Status: 'Saved vehiculo' });
+      res.json({ Status: 'Vehiculo guardado', id: rows.insertId });
     } else {
       console.log(err);
     }

@@ -11,15 +11,20 @@ router.get('/revision', (req, res) => {
   });
 });
 
-router.post('/revision', (req, res) => {
-  const { estado, vehiculoPlaca, empleadoId, fechaRevision } = req.body;
+// Nueva revisión
 
+router.post('/revision', (req, res) => {
+  const { estado, vehiculoPlaca, empleadoId, fechaRevision, parteVehiculoId } = req.body;
+  
   const query = 'INSERT INTO revision SET ?';
 
   mysqlConnection.query(query, { estado, vehiculoPlaca, empleadoId, fechaRevision }, (err, rows, fields) => {
     !err ? res.json({ Status: 'Revisión guardada', revisionId: rows.insertId }) : console.log(err);
   });
 });
+
+
+// Revisión pendiente
 
 router.post('/revision/:id/parte', (req, res) => {
   const revisionId = req.params.id;
