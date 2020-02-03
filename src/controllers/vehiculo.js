@@ -16,11 +16,23 @@ exports.vehiculos_get_vehiculo = (req, res) => {
 
 exports.vehiculos_create_vehiculo = (req, res) => {
   const { placa, marca, linea, modelo } = req.body;
-
+  console.log("req.body", req.body);
   const query = 'INSERT INTO vehiculo SET ?';
 
   mysqlConnection.query(query, { placa, marca, linea, modelo }, (err, rows, fields) => {
-    !err ? res.json({ Status: 'Vehiculo guardado', placa }) : console.log(err);
+    if (!err) {
+      res.status(201).json({
+        Status: 'Vehículo creado',
+        vehiculo: {
+          placa,
+          marca,
+          linea,
+          modelo
+        }
+      });
+    } else {
+      console.log(err);
+    }
   });
 };
 
