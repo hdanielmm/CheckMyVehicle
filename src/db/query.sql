@@ -107,5 +107,5 @@ select r.vehiculoPlaca as placa, e.nombre as empleado, rpv.diagnostico, pv.nombr
 from revision r
 inner join revisionParteVehiculo rpv on r.id = rpv.revisionId
 inner join empleado e on e.id = rpv.tecnicoId
-inner join parteVehiculo pv on rpv.revisionId = pv.id
+inner join parteVehiculo pv on rpv.parteVehiculoId = pv.id
 where r.vehiculoPlaca = ?;

@@ -13,7 +13,7 @@ exports.vehiculos_get_vehiculo = (req, res) => {
     'from revision r ' +
     'inner join revisionParteVehiculo rpv on r.id = rpv.revisionId ' +
     'inner join empleado e on e.id = rpv.tecnicoId ' +
-    'inner join parteVehiculo pv on rpv.revisionId = pv.id ' +
+    'inner join parteVehiculo pv on rpv.parteVehiculoId = pv.id ' +
     'where r.vehiculoPlaca = ?';
 
   mysqlConnection.query(query, [placa], (err, rows, fields) => {
