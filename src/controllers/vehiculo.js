@@ -9,8 +9,16 @@ exports.vehiculos_get_all = (req, res) => {
 exports.vehiculos_get_vehiculo = (req, res) => {
   const placa = req.params.vehiculoId;
 
-  mysqlConnection.query('SELECT * FROM vehiculo WHERE placa = ?', [placa], (err, rows, fields) => {
-    !err ? res.json(rows[0]) : console.log(err)
+  const query = 'select r.vehiculoPlaca as placa, e.nombre as empleado, rpv.diagnostico, pv.nombre as parte ' +
+    'from revision r ' +
+    'inner join revisionParteVehiculo rpv on r.id = rpv.revisionId ' +
+    'inner join empleado e on e.id = rpv.tecnicoId ' +
+    'inner join parteVehiculo pv on rpv.revisionId = pv.id ' +
+    'where r.vehiculoPlaca = ?';
+
+  mysqlConnection.query(query, [placa], (err, rows, fields) => {
+    console.log(rows);
+    !err ? res.status(200).json(rows) : console.log(err);
   });
 };
 

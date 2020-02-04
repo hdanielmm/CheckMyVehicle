@@ -99,4 +99,13 @@ inner join empleado e on e.id = rpv.tecnicoId;
 select r.vehiculoPlaca, e.nombre, rpv.diagnostico
 from ((revision r
 inner join revisionParteVehiculo rpv on r.id = rpv.revisionId)
-inner join empleado e on e.id = rpv.tecnicoId); 
+inner join empleado e on e.id = rpv.tecnicoId);
+
+/* Ultima revisión */
+
+select r.vehiculoPlaca as placa, e.nombre as empleado, rpv.diagnostico, pv.nombre as parte
+from revision r
+inner join revisionParteVehiculo rpv on r.id = rpv.revisionId
+inner join empleado e on e.id = rpv.tecnicoId
+inner join parteVehiculo pv on rpv.revisionId = pv.id
+where r.vehiculoPlaca = ?;
