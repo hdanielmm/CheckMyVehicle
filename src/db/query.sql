@@ -109,3 +109,5 @@ inner join revisionParteVehiculo rpv on r.id = rpv.revisionId
 inner join empleado e on e.id = rpv.tecnicoId
 inner join parteVehiculo pv on rpv.parteVehiculoId = pv.id
 where r.vehiculoPlaca = ?;
+
+alter table revision modify column empleadoId int(20) null;
